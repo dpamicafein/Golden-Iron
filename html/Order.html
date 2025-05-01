@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>طلبك</title>
+  <style>
+    .delete-all-btn, .send-order-btn {
+      margin: 20px 0;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      color: white;
+    }
+
+    .delete-all-btn {
+      background-color: red;
+    }
+
+    .send-order-btn {
+      background-color: green;
+    }
+
+    .send-order-btn:hover {
+      background-color: #2d9c2d;
+    }
+
+    .order-item {
+      border: 1px solid #9b9b9b;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      background: #8b8b8b;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.light-mode {
+      background-color: #f4f4f4;
+      color: #000;
+    }
+
+    body.dark-mode {
+      background-color: #0f1a23;
+      color: #fff;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #0f1a23;
+      color: white;
+    }
+
+    .navbar.dark-mode {
+      background-color: #ffffff;
+      color: #000;
+    }
+
+    .navbar-center {
+      flex-grow: 1;
+      text-align: center;
+    }
+
+    .icons {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .theme-icon {
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .theme-icon:hover {
+      transform: scale(1.1);
+    }
+
+    .icon-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30px;
+      height: 30px;
+      border: 2px dashed #5fc9ff;
+      border-radius: 50%;
+      color: #5fc9ff;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .icon-btn:hover {
+      background-color: #5fc9ff;
+      color: #0f1a23;
+    }
+
+    .dark-mode .icon-btn {
+      border-color: #0f1a23;
+      color: #0f1a23;
+    }
+
+    .dark-mode .icon-btn:hover {
+      background-color: #0f1a23;
+      color: #ffffff;
+    }
+
+    .home-link {
+      font-weight: bold;
+      color: #000000;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    .home-link:hover {
+      color: #00adb5;
+    }
+
+    input.dark-mode, select.dark-mode {
+      background-color: #444;
+      color: #fff;
+      border: 1px solid #666;
+    }
+
+    input, select {
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .no-orders-msg {
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      margin-top: 30px;
+      color: inherit;
+    }
+
+    .continue-shopping-btn {
+      display: inline-block;
+      padding: 12px 25px;
+      background-color: rgb(0, 123, 255);
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+      text-align: center;
+    }
+
+    .continue-shopping-btn:hover {
+      background-color: black;
+    }
+
+    .continue-shopping-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .light-mode .home-link {
+      color: #eeeeee;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="navbar" class="navbar">
+    <div class="icons">
+      <div id="language-icon" class="icon-btn">Ar</div>
+      <img id="theme-icon" src="../assets/imgs/moon-icon-512x512-fm9crgpt.png" class="theme-icon" alt="تبديل الوضع">
+    </div>
+    <div class="navbar-center">
+      <a href="Gold Iron.html" class="home-link" id="home-btn" data-key="home">الصفحة الرئيسية</a>
+    </div>
+    <img src="../assets/imgs/Screenshot 2025-01-25 060236.png" alt="Solevya Logo" class="logo-img" width="80" height="60">
+  </div>
+
+  <h2 data-key="orders-title">الطلبات التي قمت بإضافتها:</h2>
+
+  <button onclick="clearAllOrders()" class="delete-all-btn" data-key="delete-all-btn">حذف جميع الطلبات</button>
+
+  <br>
+
+  <button onclick="sendOrder()" class="send-order-btn" data-key="send-order-btn">إرسال الطلب</button>
+
+  <div id="orderList"></div>
+
+  <script>
+    const orderList = document.getElementById('orderList');
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  
+    const translations = {
+      "orders-title": { en: "الطلبات التي قمت بإضافتها:", ar: "Your Orders:" },
+      "delete-all-btn": { en: "حذف جميع الطلبات", ar: "Delete All Orders" },
+      "send-order-btn": { en: "إرسال الطلب", ar: "Send Order" },
+      "no-orders": { en: "لا توجد طلبات حتى الآن.", ar: "No orders yet." },
+      "order-number": { en: "رقم الطلب", ar: "Order Number" },
+      "product-name": { en: "اسم المنتج", ar: "Product Name" },
+      "quantity": { en: "الكمية", ar: "Quantity" },
+      "size": { en: "الحجم", ar: "Size" },
+      "color": { en: "اللون", ar: "Color" },
+      "note": { en: "ملاحظات", ar: "Notes" },
+      "no-notes": { en: "لا توجد ملاحظات", ar: "No notes" },
+      "delete-order": { en: "حذف الطلب", ar: "Delete Order" },
+      "confirm-delete": { en: "هل أنت متأكد من حذف هذا الطلب؟", ar: "Are you sure you want to delete this order?" },
+      "confirm-clear": { en: "هل أنت متأكد من حذف جميع الطلبات؟", ar: "Are you sure you want to delete all orders?" },
+      "no-orders-alert": { en: "لا يوجد طلبات لإرسالها.", ar: "There are no orders to send." },
+      "continue-shopping": { en: "متابعة الشراء", ar: "Continue Shopping" },
+      "home": { ar: "Home", en: "الصفحة الرئيسية" }
+    };
+  
+    let currentLanguage = localStorage.getItem('language') || 'ar';
+  
+    function renderOrders() {
+      orderList.innerHTML = '';
+  
+      if (cart.length === 0) {
+        orderList.innerHTML = `<div class='no-orders-msg'>${translations["no-orders"][currentLanguage]}</div>`;
+      } else {
+        cart.forEach((item, index) => {
+          const orderId = "#" + (index + 1);
+          const orderHTML = ` 
+            <div class="order-item" id="order-${index}">
+              <p><strong>${translations["order-number"][currentLanguage]}:</strong> ${orderId}</p>
+              <p><strong>${translations["product-name"][currentLanguage]}:</strong> ${item.name || "غير محدد"}</p>
+              <p><strong>${translations["quantity"][currentLanguage]}:</strong> ${item.quantity}</p>
+              <p><strong>${translations["size"][currentLanguage]}:</strong> ${item.size}</p>
+              <p><strong>${translations["color"][currentLanguage]}:</strong> ${item.color}</p>
+              <p><strong>${translations["note"][currentLanguage]}:</strong> ${item.note || translations["no-notes"][currentLanguage]}</p>
+              <button onclick="deleteOrder(${index})" style="margin-top: 10px; padding: 8px 16px; background-color: #d9534f; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                ${translations["delete-order"][currentLanguage]}
+              </button>
+            </div>
+          `;
+          orderList.innerHTML += orderHTML;
+        });
+      }
+  
+      const continueShoppingButton = `
+        <div class="continue-shopping-container">
+          <a href="ContactUs.html" class="continue-shopping-btn">
+            ${translations["continue-shopping"][currentLanguage]}
+          </a>
+        </div>
+      `;
+      orderList.innerHTML += continueShoppingButton;
+    }
+  
+    function sendOrder() {
+      if (cart.length === 0) {
+        alert(translations["no-orders-alert"][currentLanguage]);
+        return;
+      }
+  
+      let emailBody = `${translations["orders-title"][currentLanguage]}\n\n`;
+      cart.forEach((item, index) => {
+        emailBody += `${translations["order-number"][currentLanguage]} #${index + 1}\n`;
+        emailBody += `${translations["product-name"][currentLanguage]}: ${item.name || "غير محدد"}\n`;
+        emailBody += `${translations["quantity"][currentLanguage]}: ${item.quantity}\n`;
+        emailBody += `${translations["size"][currentLanguage]}: ${item.size}\n`;
+        emailBody += `${translations["color"][currentLanguage]}: ${item.color}\n`;
+        emailBody += `${translations["note"][currentLanguage]}: ${item.note || translations["no-notes"][currentLanguage]}\n\n`;
+      });
+  
+      const subject = encodeURIComponent("طلب جديد من العميل");
+      const body = encodeURIComponent(emailBody);
+      const email = "abdurhmanyxz123@gmail.com";
+      const gmailLink = `https://mail.google.com/mail/u/0/?view=cm&fs=1&to=${email}&su=${subject}&body=${body}`;
+      window.open(gmailLink, "_blank");
+    }
+  
+    function deleteOrder(index) {
+      if (confirm(translations["confirm-delete"][currentLanguage])) {
+        cart.splice(index, 1);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        location.reload();
+      }
+    }
+  
+    function clearAllOrders() {
+      if (confirm(translations["confirm-clear"][currentLanguage])) {
+        localStorage.removeItem('cart');
+        location.reload();
+      }
+    }
+  
+    const themeIcon = document.getElementById('theme-icon');
+    const languageIcon = document.getElementById('language-icon');
+    const body = document.body;
+    const navbar = document.getElementById('navbar');
+  
+    let currentTheme = localStorage.getItem('theme') || 'light-mode';
+  
+    applyTheme(currentTheme);
+    applyLanguage(currentLanguage);
+    renderOrders();
+  
+    themeIcon.addEventListener('click', () => {
+      currentTheme = currentTheme === 'dark-mode' ? 'light-mode' : 'dark-mode';
+      applyTheme(currentTheme);
+      localStorage.setItem('theme', currentTheme);
+    });
+  
+    languageIcon.addEventListener('click', () => {
+      currentLanguage = currentLanguage === 'ar' ? 'en' : 'ar';
+      localStorage.setItem('language', currentLanguage);
+      applyLanguage(currentLanguage);
+      renderOrders();
+    });
+  
+    function applyTheme(theme) {
+      body.classList.remove('light-mode', 'dark-mode');
+      body.classList.add(theme);
+      navbar.classList.remove('light-mode', 'dark-mode');
+      navbar.classList.add(theme);
+      themeIcon.src = theme === 'dark-mode'
+        ? '../assets/imgs/png-clipart-computer-icons-icon-design-black-sun-text-hand-thumbnail.png'
+        : '../assets/imgs/moon-icon-512x512-fm9crgpt.png';
+    }
+  
+    function applyLanguage(lang) {
+      document.querySelectorAll('[data-key]').forEach(el => {
+        const key = el.getAttribute('data-key');
+        el.textContent = translations[key][lang];
+      });
+  
+      languageIcon.textContent = lang === 'ar' ? 'Ar' : 'En';
+    }
+  </script>
+
+</body>
+</html>

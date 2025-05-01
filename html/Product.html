@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>عرض المنتج</title>
+  <link rel="stylesheet" href="../css/Product_Styles.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.light-mode {
+      background-color: #f4f4f4;
+      color: #000;
+    }
+
+    body.dark-mode {
+      background-color: #0f1a23;
+      color: #fff;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #0f1a23;
+      color: white;
+    }
+
+    .navbar.dark-mode {
+      background-color: #ffffff;
+      color: #000;
+    }
+
+    .icons {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .navbar-center {
+      flex: 1;
+      text-align: center;
+    }
+
+    .home-link {
+      font-weight: bold;
+      color: #000000;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    .home-link:hover {
+      color: #00adb5;
+    }
+
+    .theme-icon {
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .theme-icon:hover {
+      transform: scale(1.1);
+    }
+
+    .icon-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30px;
+      height: 30px;
+      border: 2px dashed #5fc9ff;
+      border-radius: 50%;
+      color: #5fc9ff;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .icon-btn:hover {
+      background-color: #5fc9ff;
+      color: #0f1a23;
+    }
+
+    .dark-mode .icon-btn {
+      border-color: #0f1a23;
+      color: #0f1a23;
+    }
+
+    .dark-mode .icon-btn:hover {
+      background-color: #0f1a23;
+      color: #ffffff;
+    }
+
+    input.dark-mode, select.dark-mode {
+      background-color: #444;
+      color: #fff;
+      border: 1px solid #666;
+    }
+
+    input, select {
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .buttons {
+      margin: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: #ffffff;
+    }
+
+    button:hover {
+      background-color: #000000;
+      color: #ffffff;
+    }
+
+    .info {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #555;
+    }
+
+    .video-container {
+      flex: 1;
+    }
+
+    .product-name {
+      text-align: center;
+      font-size: 18px;
+      color: #ffffff;
+      margin-top: 10px;
+    }
+    .light-mode .home-link {
+      color: #eeeeee;
+    }
+  </style> 
+</head>
+<body>
+
+  <div id="navbar" class="navbar">
+    <div class="icons">
+      <div id="language-icon" class="icon-btn">Ar</div>
+      <img id="theme-icon" src="../assets/imgs/moon-icon-512x512-fm9crgpt.png" class="theme-icon" alt="تبديل الوضع">
+    </div>
+
+    <div class="navbar-center">
+      <a href="Gold Iron.html" class="home-link" id="home-btn" data-key="home">الصفحة الرئيسية</a>
+    </div>
+
+    <img src="../assets/imgs/Screenshot 2025-01-25 060236.png" alt="Solevya Logo" class="logo-img" width="80" height="60">
+  </div>
+
+  <br><br><br>
+
+  <ul class="projects-grid">
+    <li class="project-card">
+      <a href="../assets/imgs/webApp.png" target="_blank">
+        <img src="../assets/imgs/webApp.png" alt="Web App">
+      </a>
+      <p class="product-name" data-key="product-name">حاويات</p>
+
+      <div class="quantity-wrapper">
+        <label for="qty1" data-key="qty-label">الكمية:</label>
+        <input type="number" id="qty1" name="qty1" min="1" value="1">
+      </div>
+
+      <br>
+
+      <select id="siz">
+        <option data-key="size-small">صغير</option>
+        <option data-key="size-medium">متوسط</option>
+        <option data-key="size-large">كبير</option>
+      </select>
+
+      <select id="colr">
+        <option data-key="color-red">اخضر</option>
+        <option data-key="color-blue">اصفر</option>
+        <option data-key="color-black">أسود</option>
+      </select>
+
+      <div>
+        <div for="note" class="note" data-key="note-label">ملاحظات إضافية:</div>
+        <input id="note" placeholder="اكتب أي ملاحظات بخصوص الطلب...">
+      </div>
+
+      <br>
+
+      <button id="submit-btn" class="submit-btn" data-key="submit-btn">إضافة الى الطلب</button>
+    </li>
+  </ul>
+
+  <br><br>
+
+  <script>
+    const translations = {
+      "qty-label": { ar: "Quantity:", en: "الكمية:" },
+      "size-label": { ar: "Size:", en: "الحجم:" },
+      "color-label": { ar: "Color:", en: "اللون:" },
+      "note-label": { ar: "Additional Notes:", en: "ملاحظات إضافية:" },
+      "size-small": { ar: "Small", en: "صغير" },
+      "size-medium": { ar: "Medium", en: "متوسط" },
+      "size-large": { ar: "Large", en: "كبير" },
+      "color-red": { ar: "Green", en: "اخضر" },
+      "color-blue": { ar: "Yellow", en: "اصفر" },
+      "color-black": { ar: "Black", en: "أسود" },
+      "submit-btn": { ar:"Add to order", en: "إضافة إلى الطلب" },
+      "product-name": { ar:"Haweyat", en: "حاويات" },
+      "home": { ar: "Home", en: "الصفحة الرئيسية" }
+    };
+
+    const themeIcon = document.getElementById('theme-icon');
+    const languageIcon = document.getElementById('language-icon');
+    const body = document.body;
+    const navbar = document.getElementById('navbar');
+    const inputs = document.querySelectorAll('input, select');
+
+    let currentLanguage = localStorage.getItem('language') || 'ar';
+    let currentTheme = localStorage.getItem('theme') || 'light-mode';
+
+    applyTheme(currentTheme);
+    applyLanguage(currentLanguage);
+
+    themeIcon.addEventListener('click', () => {
+      currentTheme = currentTheme === 'dark-mode' ? 'light-mode' : 'dark-mode';
+      applyTheme(currentTheme);
+      localStorage.setItem('theme', currentTheme);
+    });
+
+    languageIcon.addEventListener('click', () => {
+      currentLanguage = currentLanguage === 'ar' ? 'en' : 'ar';
+      applyLanguage(currentLanguage);
+      localStorage.setItem('language', currentLanguage);
+    });
+
+    function applyTheme(theme) {
+      body.classList.remove('light-mode', 'dark-mode');
+      body.classList.add(theme);
+      navbar.classList.remove('light-mode', 'dark-mode');
+      navbar.classList.add(theme);
+      inputs.forEach(input => {
+        input.classList.remove('light-mode', 'dark-mode');
+        input.classList.add(theme);
+      });
+      themeIcon.src = theme === 'dark-mode'
+        ? '../assets/imgs/png-clipart-computer-icons-icon-design-black-sun-text-hand-thumbnail.png'
+        : '../assets/imgs/moon-icon-512x512-fm9crgpt.png';
+    }
+
+    function applyLanguage(lang) {
+      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'rtl';
+      document.querySelectorAll('[data-key]').forEach(el => {
+        const key = el.getAttribute('data-key');
+        el.textContent = translations[key][lang];
+      });
+      languageIcon.textContent = lang === 'ar' ? 'Ar' : 'En';
+    }
+
+    document.getElementById('submit-btn').addEventListener('click', () => {
+      const qty = document.getElementById('qty1').value;
+      const size = document.getElementById('siz').value;
+      const color = document.getElementById('colr').value;
+      const note = document.getElementById('note').value;
+      const productName = document.querySelector('.product-name').textContent.trim();
+
+      const item = {
+        name: productName,
+        quantity: qty,
+        size: size,
+        color: color,
+        note: note
+      };
+
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push(item);
+      localStorage.setItem('cart', JSON.stringify(cart));
+
+      window.location.href = 'Order.html';
+    });
+  </script>
+
+</body>
+</html>

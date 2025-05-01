@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/Gold Iron_Styles.css" />
+  <title>Gold Iron</title>
+  <link rel="icon" href="../assets/imgs/Screenshot 2025-01-25 060236.png" />
+  <style>
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    
+    body.light-mode {
+      background-color: #f4f4f4;
+      color: #000;
+    }
+
+    
+    body.dark-mode {
+      background-color: #0f1a23;
+      color: #fff;
+    }
+
+    
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #0f1a23;
+      color: white;
+    }
+
+    .navbar.dark-mode {
+      background-color: #ffffff;
+      color: #000;
+    }
+
+    .icons {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .theme-icon {
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .theme-icon:hover {
+      transform: scale(1.1);
+    }
+
+    .icon-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30px;
+      height: 30px;
+      border: 2px dashed #5fc9ff;
+      border-radius: 50%;
+      color: #5fc9ff;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .icon-btn:hover {
+      background-color: #5fc9ff;
+      color: #0f1a23;
+    }
+
+    .dark-mode .icon-btn {
+      border-color: #0f1a23;
+      color: #0f1a23;
+    }
+
+    .dark-mode .icon-btn:hover {
+      background-color: #0f1a23;
+      color: #ffffff;
+    }
+
+    body.light-mode h1,
+    body.light-mode h3,
+    body.light-mode h4,
+    body.light-mode p,
+    body.dark-mode a {
+      color: #000000;
+    }
+
+
+    input.dark-mode, select.dark-mode {
+      background-color: #444;
+      color: #fff;
+      border: 1px solid #666;
+    }
+
+    input, select {
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+  </style> 
+</head>
+<body class="b">
+  <div id="navbar" class="navbar">
+    <img src="../assets/imgs/Screenshot 2025-01-25 060236.png" alt="Solevya Logo" class="logo-img" width="80" height="60"/>
+
+    <header>
+      <nav class="navigation">
+        <ul>
+          <li><a href="#AboutUs" data-key="aboutus">About Us</a></li>
+          <li><a href="#OurWork" data-key="ourworks">Our Works</a></li>
+          <li><a href="#ContactUs" data-key="contactus">Contact Us</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="icons">
+      <img id="theme-icon" src="../assets/imgs/moon-icon-512x512-fm9crgpt.png" class="theme-icon" alt="تبديل الوضع"/>
+      <div id="language-icon" class="icon-btn">Ar</div>
+    </div>
+  </div>
+
+  <hr><br>
+
+  <section class="hero">
+    <img class="arrow" src="../assets/svg/arrow.svg" alt="arrow" />
+    <div class="heroSub">
+      <h1 class="name" data-key="name">We Are Gold Iron</h1>
+      <h1 class="title" data-key="title">Iron manufacturing company</h1>
+      <div class="heroBtns">
+        <a class="hireUs" href="ContactUs.html" data-key="hireus">Hire Us</a>
+      </div>
+    </div>
+    <img src="../assets/imgs/Screenshot 2025-01-25 060236.png" alt="hero img" class="Hero Img"/>
+  </section>
+
+  <section class="AboutUs" id="AboutUs">
+    <img src="../assets/imgs/Screenshot 2025-01-25 060236.png" alt="AboutUs image" class="AboutUs Img"/>
+    <div class="textContainer">
+      <div class="textTitle">
+        <h1 class="AboutName" data-key="aboutname">About</h1>
+        <h1 class="AboutTitle" data-key="abouttitle">Us</h1>
+        <img src="../assets/svg/lightbulb.svg" alt="lightbulb" class="light"/>
+      </div>
+      <p class="AboutUsPar" data-key="aboutuspar">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+         Cupiditate laboriosam dignissimos rem aspernatur! Aliquid debitis facilis
+        consectetur voluptas amet quaerat qui, quasi cumque dolorum quia quod aliquam perspiciatis error sapiente?
+      </p>
+    </div>
+  </section>
+
+  <section class="Works" id="OurWork">
+    <div class="WorksContainer">
+      <div class="ProjectTitle">
+        <h1 class="AboutName" data-key="ourworks">Our Recent</h1>
+        <h1 class="AboutTitle">Works</h1>
+      </div>
+      <ul>
+        <li><a href="#"><img src="../assets/imgs/landingPage.png" alt="LandingPage" /></a></li>
+        <li><a href="#"><img src="../assets/imgs/webApp.png" alt="WebApp" /></a></li>
+        <li><a href="#"><img src="../assets/imgs/app.png" alt="App" /></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="ContactUsContainer" id="ContactUs">
+    <div class="ContactTitle">
+      <h1 class="AboutName" data-key="contactus">Contact</h1>
+    </div>
+    <div class="Contact">
+      <div class="EmailAndPhone">
+        <img src="../assets/svg/Email.svg" alt="Email Img" />
+        <a href="mailto:......@gmail.com"><h3>......@gmail.com</h3></a>
+      </div>
+      <div class="EmailAndPhone">
+        <img src="../assets/svg/phone.svg" alt="Phone Img" />
+        <h3>000 000 0000</h3>
+      </div>
+    </div>
+    <div class="SocialMedia">
+      <a href="#"><img src="../assets/svg/linkedin.svg" alt="" /></a>
+      <a href="#"><img src="../assets/svg/github.svg" alt="" /></a>
+      <a href="#"><img src="../assets/svg/twitter.svg" alt="" /></a>
+      <a href="#"><img src="../assets/svg/youtube.svg" alt="" /></a>
+    </div>
+  </section>
+
+  <hr>
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-column">
+        <h2 data-key="quickLinks">Quick Links</h2>
+        <ul>
+          <li><a href="#AboutUs" data-key="aboutus">About Us</a></li>
+          <li><a href="#OurWork" data-key="ourworks">Our Works</a></li>
+          <li><a href="ContactUs.html" data-key="hireus">Hire Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h2 data-key="goldenActivities">Golden Iron Activities</h2>
+        <ul><li><a href="#"></a></li></ul>
+      </div>
+      <div class="footer-column">
+        <h2>Works</h2>
+        <ul><li><a href="#"></a></li></ul>
+      </div>
+      <div class="footer-column">
+        <h2 data-key="terms">Terms and Policies</h2>
+        <ul>
+          <li><a href="#" data-key="privacy">Privacy Policy</a></li>
+          <li><a href="#" data-key="protection">Protection Policies</a></li>
+          <li><a href="#" data-key="other">Other</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <section class="footer2">
+    <hr><br>
+    <p>
+      Built By 𝓐𝓫𝓭𝓾𝓻𝓱𝓶𝓪𝓷𝔂𝔁𝔃 <br>
+      <span data-key="contactMe">Contact Me</span> <br>
+      Email: abdurhmanyxz123@gmail.com <br>
+      Phone: 0561163534
+    </p>
+    <br>
+    <h4 class="h4">Gold Iron © 2025-2025</h4>
+  </section>
+
+  <script>
+    const translations = {
+      name: { ar: "We Are Gold Iron", en: "نحن جولدن آيرون" },
+      title: { ar: "Iron manufacturing company", en: "شركة لصناعة الحديد" },
+      aboutname: { ar: "About", en: "الشركة" },
+      abouttitle: { ar: "Us", en: "عن" },
+      ourworks: { ar: "Our Recent", en: "أعمالنا" },
+      contactus: { ar: "Contact", en: "تواصل" },
+      hireus: { ar: "Hire Us", en: "وظفنا" },
+      aboutus: { ar: "About Us", en: "عن الشركة" },
+      quickLinks: { ar: "Quick Links", en: "روابط سريعة" },
+      goldenActivities: { ar: "Golden Iron Activities", en: "أنشطة جولدن آيرون" },
+      terms: { ar: "Terms and Policies", en: "الشروط والسياسات" },
+      privacy: { ar: "Privacy Policy", en: "سياسة الخصوصية" },
+      protection: { ar: "Protection Policies", en: "سياسات الحماية" },
+      other: { ar: "Other", en: "أخرى" },
+      aboutuspar: { ar: 
+        "OtLorem ipsum dolor, sit amet consectetur adipisicing elit.Cupiditate laboriosam dignissimos rem aspernatur! Aliquid debitis facilis consectetur voluptas amet quaerat qui, quasi cumque dolorum quia quod aliquam perspiciatis error sapiente?her"
+        , en: 
+        "في زحمة الشوارع وتداخل الأصوات، كان يوسف يسير بخطى بطيئة، يتأمل وجوه المارة، يبحث عن لحظة هدوء بين الضجيج. تذكر رسالة قديمة وجدها بين دفاتره، كلماتها كانت غامضة لكنها أثارت بداخله شعورًا بالحنين. توقف أمام مقهى صغير، جلس، وطلب قهوة بلا سكر."
+       }
+    };
+
+    const themeIcon = document.getElementById("theme-icon");
+    const languageIcon = document.getElementById("language-icon");
+    const body = document.body;
+    const navbar = document.getElementById("navbar");
+    const inputs = document.querySelectorAll("input, select");
+
+    let currentLanguage = localStorage.getItem("language") || "ar";
+    let currentTheme = localStorage.getItem("theme") || "light-mode";
+
+    applyTheme(currentTheme);
+    applyLanguage(currentLanguage);
+
+    themeIcon.addEventListener("click", () => {
+      currentTheme = currentTheme === "dark-mode" ? "light-mode" : "dark-mode";
+      applyTheme(currentTheme);
+      localStorage.setItem("theme", currentTheme);
+    });
+
+    languageIcon.addEventListener("click", () => {
+      currentLanguage = currentLanguage === "ar" ? "en" : "ar";
+      applyLanguage(currentLanguage);
+      localStorage.setItem("language", currentLanguage);
+    });
+
+    function applyTheme(theme) {
+      body.classList.remove("light-mode", "dark-mode");
+      body.classList.add(theme);
+      navbar.classList.remove("light-mode", "dark-mode");
+      navbar.classList.add(theme);
+      inputs.forEach((input) => {
+        input.classList.remove("light-mode", "dark-mode");
+        input.classList.add(theme);
+      });
+      themeIcon.src =
+        theme === "dark-mode"
+          ? "../assets/imgs/png-clipart-computer-icons-icon-design-black-sun-text-hand-thumbnail.png"
+          : "../assets/imgs/moon-icon-512x512-fm9crgpt.png";
+    }
+
+    function applyLanguage(lang) {
+      document.querySelectorAll("[data-key]").forEach((el) => {
+        const key = el.getAttribute("data-key");
+        if (translations[key]) {
+          el.textContent = translations[key][lang];
+        }
+      });
+      languageIcon.textContent = lang === "ar" ? "Ar" : "En";
+    }
+  </script>
+</body>
+</html>
